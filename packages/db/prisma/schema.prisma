@@ -12,14 +12,14 @@ datasource db {
 
 model Post {
     id      String @id @default(cuid())
-    title   String
     content String
+
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId String
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
+    id String @id
+
+    posts Post[]
 }
