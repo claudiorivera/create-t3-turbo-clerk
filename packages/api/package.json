@@ -1,5 +1,5 @@
 {
-  "name": "@acme/api",
+  "name": "@claudiorivera/api",
   "version": "0.1.0",
   "main": "./index.ts",
   "types": "./index.ts",
@@ -11,22 +11,22 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@acme/auth": "^0.1.0",
-    "@acme/db": "^0.1.0",
+    "@claudiorivera/auth": "^0.1.0",
+    "@claudiorivera/db": "^0.1.0",
     "@trpc/client": "^10.36.0",
     "@trpc/server": "^10.36.0",
     "superjson": "1.13.1",
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@acme/eslint-config": "^0.2.0",
+    "@claudiorivera/eslint-config": "^0.2.0",
     "eslint": "^8.45.0",
     "typescript": "^5.1.6"
   },
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@acme/eslint-config/base"
+      "@claudiorivera/eslint-config/base"
     ]
   }
 }

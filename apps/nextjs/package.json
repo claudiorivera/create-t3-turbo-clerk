@@ -1,5 +1,5 @@
 {
-  "name": "@acme/nextjs",
+  "name": "@claudiorivera/nextjs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,9 +13,9 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@acme/api": "^0.1.0",
-    "@acme/auth": "^0.1.0",
-    "@acme/db": "^0.1.0",
+    "@claudiorivera/api": "^0.1.0",
+    "@claudiorivera/auth": "^0.1.0",
+    "@claudiorivera/db": "^0.1.0",
     "@t3-oss/env-nextjs": "^0.6.0",
     "@tanstack/react-query": "^4.32.0",
     "@tanstack/react-query-devtools": "^4.32.0",
@@ -31,8 +31,8 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@acme/eslint-config": "^0.2.0",
-    "@acme/tailwind-config": "^0.1.0",
+    "@claudiorivera/eslint-config": "^0.2.0",
+    "@claudiorivera/tailwind-config": "^0.1.0",
     "@types/node": "^18.17.1",
     "@types/react": "^18.2.17",
     "@types/react-dom": "^18.2.7",
@@ -46,9 +46,9 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@acme/eslint-config/base",
-      "@acme/eslint-config/nextjs",
-      "@acme/eslint-config/react"
+      "@claudiorivera/eslint-config/base",
+      "@claudiorivera/eslint-config/nextjs",
+      "@claudiorivera/eslint-config/react"
     ]
   }
 }

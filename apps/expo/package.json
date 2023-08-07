@@ -1,5 +1,5 @@
 {
-  "name": "@acme/expo",
+  "name": "@claudiorivera/expo",
   "version": "0.1.0",
   "private": true,
   "main": "index.tsx",
@@ -34,9 +34,9 @@
     "superjson": "1.13.1"
   },
   "devDependencies": {
-    "@acme/api": "^0.1.0",
-    "@acme/eslint-config": "^0.2.0",
-    "@acme/tailwind-config": "^0.1.0",
+    "@claudiorivera/api": "^0.1.0",
+    "@claudiorivera/eslint-config": "^0.2.0",
+    "@claudiorivera/tailwind-config": "^0.1.0",
     "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.22.9",
     "@babel/runtime": "^7.22.6",
@@ -51,8 +51,8 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@acme/eslint-config/base",
-      "@acme/eslint-config/react"
+      "@claudiorivera/eslint-config/base",
+      "@claudiorivera/eslint-config/react"
     ]
   }
 }

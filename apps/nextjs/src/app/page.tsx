@@ -1,6 +1,5 @@
 import { Suspense } from "react";
-
-import { auth } from "@acme/auth";
+import { auth } from "@claudiorivera/auth";
 
 import { SignIn, SignOut } from "~/components/auth";
 import { CreatePostForm, PostList } from "./posts";
