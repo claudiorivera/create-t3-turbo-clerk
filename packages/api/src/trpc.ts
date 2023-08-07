@@ -11,7 +11,7 @@ import type {
 	SignedOutAuthObject,
 } from "@clerk/nextjs/api";
 import { getAuth } from "@clerk/nextjs/server";
-import { initTRPC, TRPCError } from "@trpc/server";
+import { initTRPC } from "@trpc/server";
 import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import superjson from "superjson";
 import { ZodError } from "zod";
@@ -97,16 +97,3 @@ export const createTRPCRouter = t.router;
  * can still access user session data if they are logged in
  */
 export const publicProcedure = t.procedure;
-
-const isAuthed = t.middleware(({ next, ctx }) => {
-	if (!ctx.auth.userId) {
-		throw new TRPCError({ code: "UNAUTHORIZED", message: "Not authenticated" });
-	}
-	return next({
-		ctx: {
-			auth: ctx.auth,
-		},
-	});
-});
-
-export const protectedProcedure = publicProcedure.use(isAuthed);
