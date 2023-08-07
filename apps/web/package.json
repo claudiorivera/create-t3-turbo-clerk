@@ -15,6 +15,7 @@
   "dependencies": {
     "@claudiorivera/api": "^0.1.0",
     "@claudiorivera/db": "^0.1.0",
+    "@clerk/nextjs": "^4.23.2",
     "@t3-oss/env-nextjs": "^0.6.0",
     "@tanstack/react-query": "^4.32.0",
     "@tanstack/react-query-devtools": "^4.32.0",
