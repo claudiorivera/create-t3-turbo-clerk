@@ -6,10 +6,11 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
-import { prisma } from "@claudiorivera/db";
 import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+
+import { prisma } from "@claudiorivera/db";
 
 /**
  * 1. CONTEXT
@@ -32,9 +33,9 @@ interface CreateContextOptions {}
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
-  return {
-    prisma,
-  };
+	return {
+		prisma,
+	};
 };
 
 /**
@@ -43,7 +44,7 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
  * @link https://trpc.io/docs/context
  */
 export const createTRPCContext = async (opts: { req?: Request }) => {
-  return createInnerTRPCContext({});
+	return createInnerTRPCContext({});
 };
 
 /**
@@ -53,17 +54,17 @@ export const createTRPCContext = async (opts: { req?: Request }) => {
  * transformer
  */
 const t = initTRPC.context<typeof createTRPCContext>().create({
-  transformer: superjson,
-  errorFormatter({ shape, error }) {
-    return {
-      ...shape,
-      data: {
-        ...shape.data,
-        zodError:
-          error.cause instanceof ZodError ? error.cause.flatten() : null,
-      },
-    };
-  },
+	transformer: superjson,
+	errorFormatter({ shape, error }) {
+		return {
+			...shape,
+			data: {
+				...shape.data,
+				zodError:
+					error.cause instanceof ZodError ? error.cause.flatten() : null,
+			},
+		};
+	},
 });
 
 /**
