@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const postRouter = createTRPCRouter({
 	all: publicProcedure.query(({ ctx }) => {
@@ -14,4 +14,25 @@ export const postRouter = createTRPCRouter({
 	delete: publicProcedure.input(z.string()).mutation(({ ctx, input }) => {
 		return ctx.prisma.post.delete({ where: { id: input } });
 	}),
+	create: protectedProcedure
+		.input(
+			z.object({
+				content: z.string(),
+			}),
+		)
+		.mutation(({ ctx, input }) => {
+			return ctx.prisma.post.create({
+				data: {
+					content: input.content,
+					user: {
+						connectOrCreate: {
+							where: { id: ctx.auth.userId },
+							create: {
+								id: ctx.auth.userId,
+							},
+						},
+					},
+				},
+			});
+		}),
 });

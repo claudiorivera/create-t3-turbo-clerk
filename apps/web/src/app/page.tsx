@@ -1,12 +1,27 @@
-import { auth, UserButton } from "@clerk/nextjs";
+import {
+	SignedIn,
+	SignedOut,
+	SignInButton,
+	SignOutButton,
+} from "@clerk/nextjs";
+
+import { CreatePostExample } from "~/components/create-post-example";
+import PostListExample from "~/components/post-list-example";
 
 export default function HomePage() {
-  const { userId } = auth();
-
-  return (
-    <div>
-      <p>User Id: {userId}</p>
-      <UserButton afterSignOutUrl="/" />
-    </div>
-  );
+	return (
+		<div>
+			<p>Home Page</p>
+			<SignedOut>
+				<SignInButton mode="modal">
+					<button className="btn">Sign in</button>
+				</SignInButton>
+			</SignedOut>
+			<SignedIn>
+				<PostListExample />
+				<CreatePostExample />
+				<SignOutButton />
+			</SignedIn>
+		</div>
+	);
 }

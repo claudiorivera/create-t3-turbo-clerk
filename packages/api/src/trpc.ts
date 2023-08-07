@@ -6,7 +6,13 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
-import { initTRPC } from "@trpc/server";
+import type {
+	SignedInAuthObject,
+	SignedOutAuthObject,
+} from "@clerk/nextjs/api";
+import { getAuth } from "@clerk/nextjs/server";
+import { initTRPC, TRPCError } from "@trpc/server";
+import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
@@ -21,7 +27,9 @@ import { prisma } from "@claudiorivera/db";
  * processing a request
  *
  */
-interface CreateContextOptions {}
+interface CreateContextOptions {
+	auth: SignedInAuthObject | SignedOutAuthObject;
+}
 
 /**
  * This helper generates the "internals" for a tRPC context. If you need to use
@@ -32,8 +40,9 @@ interface CreateContextOptions {}
  * - trpc's `createSSGHelpers` where we don't have req/res
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  */
-const createInnerTRPCContext = (opts: CreateContextOptions) => {
+const createInnerTRPCContext = ({ auth }: CreateContextOptions) => {
 	return {
+		auth,
 		prisma,
 	};
 };
@@ -43,8 +52,8 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
  * process every request that goes through your tRPC endpoint
  * @link https://trpc.io/docs/context
  */
-export const createTRPCContext = async (opts: { req?: Request }) => {
-	return createInnerTRPCContext({});
+export const createTRPCContext = (opts: CreateNextContextOptions) => {
+	return createInnerTRPCContext({ auth: getAuth(opts.req) });
 };
 
 /**
@@ -88,3 +97,16 @@ export const createTRPCRouter = t.router;
  * can still access user session data if they are logged in
  */
 export const publicProcedure = t.procedure;
+
+const isAuthed = t.middleware(({ next, ctx }) => {
+	if (!ctx.auth.userId) {
+		throw new TRPCError({ code: "UNAUTHORIZED", message: "Not authenticated" });
+	}
+	return next({
+		ctx: {
+			auth: ctx.auth,
+		},
+	});
+});
+
+export const protectedProcedure = publicProcedure.use(isAuthed);
