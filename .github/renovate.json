@@ -5,9 +5,22 @@
 		{
 			"matchPackagePatterns": ["^@claudiorivera/"],
 			"enabled": false
+		},
+		{
+			"matchUpdateTypes": ["patch", "pin", "digest"],
+			"automerge": true
+		},
+		{
+			"matchDepTypes": ["devDependencies"],
+			"matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+			"automerge": true
+		},
+		{
+			"matchPackagePatterns": ["@trpc"],
+			"groupName": "trpc",
+			"automerge": false
 		}
 	],
 	"updateInternalDeps": true,
-	"rangeStrategy": "bump",
-	"automerge": true
+	"commitMessagePrefix": "🤖"
 }
