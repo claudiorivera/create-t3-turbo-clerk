@@ -8,25 +8,24 @@ import { useWarmUpBrowser } from "../hooks/useWarmUpBrowser";
 WebBrowser.maybeCompleteAuthSession();
 
 const SignIn = () => {
-  useWarmUpBrowser();
+	useWarmUpBrowser();
 
-  const { startOAuthFlow } = useOAuth({ strategy: "oauth_github" });
+	const { startOAuthFlow } = useOAuth({ strategy: "oauth_github" });
 
-  const onPress = React.useCallback(async () => {
-    try {
-      const { createdSessionId, signIn, signUp, setActive } =
-        await startOAuthFlow();
+	const onPress = React.useCallback(async () => {
+		try {
+			const { createdSessionId, setActive } = await startOAuthFlow();
 
-      if (createdSessionId) {
-        await setActive?.({ session: createdSessionId });
-      } else {
-        // Use signIn or signUp for next steps such as MFA
-      }
-    } catch (err) {
-      console.error("OAuth error", err);
-    }
-  }, [startOAuthFlow]);
+			if (createdSessionId) {
+				await setActive?.({ session: createdSessionId });
+			} else {
+				// Use signIn or signUp for next steps such as MFA
+			}
+		} catch (err) {
+			console.error("OAuth error", err);
+		}
+	}, [startOAuthFlow]);
 
-  return <Button title="Sign in with GitHub" onPress={onPress} />;
+	return <Button title="Sign in with GitHub" onPress={onPress} />;
 };
 export default SignIn;
