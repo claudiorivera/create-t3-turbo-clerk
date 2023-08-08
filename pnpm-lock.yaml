@@ -31,7 +31,7 @@ importers:
     dependencies:
       '@clerk/clerk-expo':
         specifier: ^0.18.17
-        version: 0.18.17(@babel/core@7.22.9)(@types/react@18.2.17)(expo-auth-session@5.0.2)(expo-web-browser@12.3.2)(react-dom@18.2.0)(react-native@0.72.3)(react@18.2.0)
+        version: 0.18.17(@babel/core@7.22.9)(@types/react@18.2.18)(expo-auth-session@5.0.2)(expo-web-browser@12.3.2)(react-dom@18.2.0)(react-native@0.72.3)(react@18.2.0)
       '@expo/metro-config':
         specifier: ^0.10.7
         version: 0.10.7
@@ -118,8 +118,8 @@ importers:
         specifier: ^7.20.1
         version: 7.20.1
       '@types/react':
-        specifier: ^18.2.17
-        version: 18.2.17
+        specifier: ^18.2.18
+        version: 18.2.18
       eslint:
         specifier: ^8.45.0
         version: 8.45.0
@@ -200,8 +200,8 @@ importers:
         specifier: ^18.17.1
         version: 18.17.1
       '@types/react':
-        specifier: ^18.2.17
-        version: 18.2.17
+        specifier: ^18.2.18
+        version: 18.2.18
       '@types/react-dom':
         specifier: ^18.2.7
         version: 18.2.7
@@ -1924,7 +1924,7 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /@clerk/clerk-expo@0.18.17(@babel/core@7.22.9)(@types/react@18.2.17)(expo-auth-session@5.0.2)(expo-web-browser@12.3.2)(react-dom@18.2.0)(react-native@0.72.3)(react@18.2.0):
+  /@clerk/clerk-expo@0.18.17(@babel/core@7.22.9)(@types/react@18.2.18)(expo-auth-session@5.0.2)(expo-web-browser@12.3.2)(react-dom@18.2.0)(react-native@0.72.3)(react@18.2.0):
     resolution: {integrity: sha512-HM7+1xzrDG9vjjEF5BtgmmUyhUEGGGzYa6ZmVwFmxx454oEjivm50GMWGsVu3UwqzW0H6CstYnVkl/i8hJPpYA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -1932,7 +1932,7 @@ packages:
       expo-web-browser: '>=12'
       react: '>=16'
     dependencies:
-      '@clerk/clerk-js': 4.55.0(@babel/core@7.22.9)(@types/react@18.2.17)(react-dom@18.2.0)(react@18.2.0)
+      '@clerk/clerk-js': 4.55.0(@babel/core@7.22.9)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
       '@clerk/clerk-react': 4.23.2(react@18.2.0)
       base-64: 1.0.0
       expo-auth-session: 5.0.2(expo@49.0.6)
@@ -1946,7 +1946,7 @@ packages:
       - react-native
     dev: false
 
-  /@clerk/clerk-js@4.55.0(@babel/core@7.22.9)(@types/react@18.2.17)(react-dom@18.2.0)(react@18.2.0):
+  /@clerk/clerk-js@4.55.0(@babel/core@7.22.9)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-mhVape/9fcUU8z3CY/iduzROQ4reai0el+DZQ2meDIZO/vYk7Ya5CRFrFEt5iS7zF5998wnfQE6WCcRVPNc11g==}
     peerDependencies:
       react: '>=18'
@@ -1955,7 +1955,7 @@ packages:
       '@clerk/shared': 0.21.0(react@18.2.0)
       '@clerk/types': 3.49.0
       '@emotion/cache': 11.10.5
-      '@emotion/react': 11.10.5(@babel/core@7.22.9)(@types/react@18.2.17)(react@18.2.0)
+      '@emotion/react': 11.10.5(@babel/core@7.22.9)(@types/react@18.2.18)(react@18.2.0)
       '@floating-ui/react': 0.19.0(react-dom@18.2.0)(react@18.2.0)
       '@zxcvbn-ts/core': 2.2.1
       '@zxcvbn-ts/language-common': 3.0.2
@@ -2087,7 +2087,7 @@ packages:
     resolution: {integrity: sha512-W2P2c/VRW1/1tLox0mVUalvnWXxavmv/Oum2aPsRcoDJuob75FC3Y8FbpfLwUegRcxINtGUMPq0tFCvYNTBXNA==}
     dev: false
 
-  /@emotion/react@11.10.5(@babel/core@7.22.9)(@types/react@18.2.17)(react@18.2.0):
+  /@emotion/react@11.10.5(@babel/core@7.22.9)(@types/react@18.2.18)(react@18.2.0):
     resolution: {integrity: sha512-TZs6235tCJ/7iF6/rvTaOH4oxQg2gMAcdHemjwLKIjKz4rRuYe1HJ2TQJKnAcRAfOUDdU8XoDadCe1rl72iv8A==}
     peerDependencies:
       '@babel/core': ^7.0.0
@@ -2107,7 +2107,7 @@ packages:
       '@emotion/use-insertion-effect-with-fallbacks': 1.0.1(react@18.2.0)
       '@emotion/utils': 1.2.1
       '@emotion/weak-memoize': 0.3.1
-      '@types/react': 18.2.17
+      '@types/react': 18.2.18
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
     dev: false
@@ -3643,11 +3643,11 @@ packages:
   /@types/react-dom@18.2.7:
     resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
     dependencies:
-      '@types/react': 18.2.17
+      '@types/react': 18.2.18
     dev: true
 
-  /@types/react@18.2.17:
-    resolution: {integrity: sha512-u+e7OlgPPh+aryjOm5UJMX32OvB2E3QASOAqVMY6Ahs90djagxwv2ya0IctglNbNTexC12qCSMZG47KPfy1hAA==}
+  /@types/react@18.2.18:
+    resolution: {integrity: sha512-da4NTSeBv/P34xoZPhtcLkmZuJ+oYaCxHmyHzwaDQo9RQPBeXV+06gEk2FpqEcsX9XrnNLvRpVh6bdavDSjtiQ==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
