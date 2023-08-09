@@ -1,7 +1,10 @@
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { authedProcedure, createTRPCRouter, publicProcedure } from "../trpc";
 
 export const authRouter = createTRPCRouter({
 	getSession: publicProcedure.query(({ ctx }) => {
 		return ctx.auth.session;
+	}),
+	getSecretMessage: authedProcedure.query(() => {
+		return "you can see this secret message!";
 	}),
 });

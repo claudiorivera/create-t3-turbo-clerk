@@ -32,9 +32,9 @@ const Index = () => {
 			<Stack.Screen options={{ title: "Home Page" }} />
 			<View className="h-full w-full p-4">
 				<SignedIn>
+					<SignOut />
 					<PostListExample />
 					<CreatePostExample />
-					<SignOut />
 				</SignedIn>
 				<SignedOut>
 					<SignIn />
