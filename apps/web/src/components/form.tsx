@@ -33,6 +33,7 @@ export function useZodForm<TSchema extends z.ZodType>(
 	return form;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyZodForm = UseZodForm<any>;
 
 export function Form<TInput extends FieldValues>(
@@ -48,7 +49,7 @@ export function Form<TInput extends FieldValues>(
 				{...passThrough}
 				id={form.id}
 				onSubmit={(event) => {
-					form.handleSubmit(async (values) => {
+					void form.handleSubmit(async (values) => {
 						try {
 							await handleSubmit(values);
 						} catch (cause) {

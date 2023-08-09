@@ -32,10 +32,7 @@ const getBaseUrl = () => {
 	const localhost = debuggerHost?.split(":")[0];
 
 	if (!localhost) {
-		// return "https://your-production-url.com";
-		throw new Error(
-			"Failed to get localhost. Please point to your production server.",
-		);
+		return "https://scavenger-hunt.claudiorivera.com";
 	}
 	return `http://${localhost}:3000`;
 };
@@ -49,8 +46,8 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
 	const { getToken } = useAuth();
 
 	const [queryClient] = React.useState(() => new QueryClient());
-	const [trpcClient] = React.useState(() => {
-		return api.createClient({
+	const [trpcClient] = React.useState(() =>
+		api.createClient({
 			transformer: superjson,
 			links: [
 				httpBatchLink({
@@ -63,8 +60,8 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
 					},
 				}),
 			],
-		});
-	});
+		}),
+	);
 
 	return (
 		<api.Provider client={trpcClient} queryClient={queryClient}>

@@ -6,6 +6,7 @@ import { api } from "~/utils/api";
 import { Form, SubmitButton, useZodForm } from "~/components/form";
 
 const validationSchema = z.object({
+	title: z.string().min(1).max(100),
 	content: z.string().min(1).max(280),
 });
 
@@ -21,6 +22,7 @@ export function CreatePostExample() {
 	const form = useZodForm({
 		schema: validationSchema,
 		defaultValues: {
+			title: "",
 			content: "",
 		},
 	});
@@ -35,6 +37,15 @@ export function CreatePostExample() {
 				}}
 				className="space-y-2"
 			>
+				<label className="flex flex-col">
+					Title
+					<input type="text" {...form.register("title")} className="border" />
+					{form.formState.errors.title?.message && (
+						<p className="text-red-700">
+							{form.formState.errors.title?.message}
+						</p>
+					)}
+				</label>
 				<label className="flex flex-col">
 					Content
 					<textarea {...form.register("content")} className="border" />

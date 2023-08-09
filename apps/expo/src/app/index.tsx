@@ -1,18 +1,20 @@
 import React from "react";
-import { Button, View } from "react-native";
+import { Button, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 import { SignedIn, SignedOut, useAuth } from "@clerk/clerk-expo";
+import { FlashList } from "@shopify/flash-list";
 
-import { CreatePostExample } from "~/components/create-post-example";
-import { PostListExample } from "~/components/post-list-example";
+import { api } from "~/utils/api";
 import SignIn from "~/components/SignIn";
 
 const SignOut = () => {
 	const { isLoaded, signOut } = useAuth();
+
 	if (!isLoaded) {
 		return null;
 	}
+
 	return (
 		<View>
 			<Button
@@ -27,14 +29,12 @@ const SignOut = () => {
 
 const Index = () => {
 	return (
-		<SafeAreaView className="bg-[#1F104A]">
-			{/* Changes page title visible on the header */}
-			<Stack.Screen options={{ title: "Home Page" }} />
+		<SafeAreaView>
+			<Stack.Screen options={{ title: "Home" }} />
 			<View className="h-full w-full p-4">
 				<SignedIn>
 					<SignOut />
-					<PostListExample />
-					<CreatePostExample />
+					<PostsList />
 				</SignedIn>
 				<SignedOut>
 					<SignIn />
@@ -45,3 +45,38 @@ const Index = () => {
 };
 
 export default Index;
+
+const PostsList = () => {
+	const utils = api.useContext();
+	const { data: posts = [] } = api.post.all.useQuery();
+	const { mutate: createPost } = api.post.create.useMutation({
+		onSuccess: async () => {
+			await utils.post.all.invalidate();
+		},
+	});
+
+	return (
+		<View className="h-full w-full p-4">
+			<Button
+				title="Create Random Post"
+				onPress={() => {
+					createPost({
+						title: `Title ${Math.random()}`,
+						content: `Content ${Math.random()}`,
+					});
+				}}
+			/>
+			<FlashList
+				data={posts}
+				estimatedItemSize={20}
+				ItemSeparatorComponent={() => <View className="h-2" />}
+				renderItem={(p) => (
+					<View>
+						<Text className="text-lg font-bold">{p.item.title}</Text>
+						<Text>{p.item.content}</Text>
+					</View>
+				)}
+			/>
+		</View>
+	);
+};

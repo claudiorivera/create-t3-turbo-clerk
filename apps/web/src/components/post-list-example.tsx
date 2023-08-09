@@ -9,6 +9,7 @@ export default function PostListExample() {
 		<div>
 			{posts?.map((post) => (
 				<div key={post.id}>
+					<h2 className="font-bold">{post.title}</h2>
 					<p>{post.content}</p>
 				</div>
 			))}

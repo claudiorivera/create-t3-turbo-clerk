@@ -18,9 +18,9 @@ export default function HomePage() {
 				</SignInButton>
 			</SignedOut>
 			<SignedIn>
+				<SignOutButton />
 				<PostListExample />
 				<CreatePostExample />
-				<SignOutButton />
 			</SignedIn>
 		</div>
 	);
