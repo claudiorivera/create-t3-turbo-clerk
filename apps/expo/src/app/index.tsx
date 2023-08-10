@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, RefreshControl, Text, TextInput, View } from "react-native";
+import { RefreshControl, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 import { SignedIn, SignedOut, useAuth } from "@clerk/clerk-expo";
@@ -8,6 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { api } from "~/utils/api";
 import SignIn from "~/components/SignIn";
+import { StyledButton } from "~/components/StyledButton";
 import { usePullToRefresh } from "~/hooks/usePullToRefresh";
 
 const Index = () => {
@@ -31,16 +32,7 @@ export default Index;
 const SignOutButton = () => {
 	const { signOut } = useAuth();
 
-	return (
-		<View className="mb-4">
-			<Button
-				title="Sign Out"
-				onPress={() => {
-					void signOut();
-				}}
-			/>
-		</View>
-	);
+	return <StyledButton onPress={() => signOut()}>Sign Out</StyledButton>;
 };
 
 const PostsList = () => {
@@ -139,12 +131,9 @@ const Form = () => {
 				)}
 			</View>
 
-			<View className="mb-4">
-				<Button
-					title="Submit"
-					onPress={handleSubmit((values) => createPost(values))}
-				/>
-			</View>
+			<StyledButton onPress={handleSubmit((values) => createPost(values))}>
+				Submit
+			</StyledButton>
 		</View>
 	);
 };
