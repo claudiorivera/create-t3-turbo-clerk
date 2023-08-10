@@ -1,27 +1,18 @@
-import {
-	SignedIn,
-	SignedOut,
-	SignInButton,
-	SignOutButton,
-} from "@clerk/nextjs";
+import { SignOutButton } from "@clerk/nextjs";
 
 import { CreatePostExample } from "~/components/create-post-example";
 import PostListExample from "~/components/post-list-example";
 
 export default function HomePage() {
 	return (
-		<div>
-			<p>Home Page</p>
-			<SignedOut>
-				<SignInButton mode="modal">
-					<button className="btn">Sign in</button>
-				</SignInButton>
-			</SignedOut>
-			<SignedIn>
-				<SignOutButton />
-				<PostListExample />
-				<CreatePostExample />
-			</SignedIn>
+		<div className="flex h-screen flex-col gap-4 p-4">
+			<SignOutButton>
+				<button className="w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
+					Sign Out
+				</button>
+			</SignOutButton>
+			<PostListExample />
+			<CreatePostExample />
 		</div>
 	);
 }

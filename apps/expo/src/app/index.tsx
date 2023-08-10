@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Text, TextInput, View } from "react-native";
+import { Button, RefreshControl, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 import { SignedIn, SignedOut, useAuth } from "@clerk/clerk-expo";
@@ -8,16 +8,31 @@ import { Controller, useForm } from "react-hook-form";
 
 import { api } from "~/utils/api";
 import SignIn from "~/components/SignIn";
+import { usePullToRefresh } from "~/hooks/usePullToRefresh";
 
-const SignOut = () => {
-	const { isLoaded, signOut } = useAuth();
+const Index = () => {
+	return (
+		<SafeAreaView className="h-full p-4">
+			<Stack.Screen options={{ title: "Home" }} />
+			<SignedIn>
+				<SignOutButton />
+				<PostsList />
+				<Form />
+			</SignedIn>
+			<SignedOut>
+				<SignIn />
+			</SignedOut>
+		</SafeAreaView>
+	);
+};
 
-	if (!isLoaded) {
-		return null;
-	}
+export default Index;
+
+const SignOutButton = () => {
+	const { signOut } = useAuth();
 
 	return (
-		<View>
+		<View className="mb-4">
 			<Button
 				title="Sign Out"
 				onPress={() => {
@@ -28,46 +43,25 @@ const SignOut = () => {
 	);
 };
 
-const Index = () => {
-	return (
-		<SafeAreaView>
-			<Stack.Screen options={{ title: "Home" }} />
-			<View className="h-full w-full p-4">
-				<SignedIn>
-					<SignOut />
-					<PostsList />
-				</SignedIn>
-				<SignedOut>
-					<SignIn />
-				</SignedOut>
-			</View>
-		</SafeAreaView>
-	);
-};
-
-export default Index;
-
 const PostsList = () => {
-	const { data: posts = [] } = api.post.all.useQuery();
-	const utils = api.useContext();
+	const { data: posts = [], refetch } = api.post.all.useQuery();
+	const { isRefreshing, onRefresh } = usePullToRefresh(refetch);
 
 	return (
-		<View className="h-full w-full p-4">
-			<Form />
-			<Button
-				onPress={() => void utils.post.all.invalidate()}
-				title="Refresh posts"
-			/>
+		<View className="h-full">
 			<FlashList
 				data={posts}
 				estimatedItemSize={20}
 				ItemSeparatorComponent={() => <View className="h-2" />}
 				renderItem={(p) => (
 					<View>
-						<Text className="text-lg font-bold">{p.item.title}</Text>
+						<Text className="text-md font-semibold">{p.item.title}</Text>
 						<Text>{p.item.content}</Text>
 					</View>
 				)}
+				refreshControl={
+					<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+				}
 			/>
 		</View>
 	);
@@ -102,8 +96,8 @@ const Form = () => {
 	});
 
 	return (
-		<View className="flex flex-col gap-4">
-			<View>
+		<View className="mt-auto">
+			<View className="mb-4">
 				<Text>Title</Text>
 				<Controller
 					control={control}
@@ -125,7 +119,7 @@ const Form = () => {
 				)}
 			</View>
 
-			<View>
+			<View className="mb-4">
 				<Text>Content</Text>
 				<Controller
 					control={control}
@@ -145,10 +139,12 @@ const Form = () => {
 				)}
 			</View>
 
-			<Button
-				title="Submit"
-				onPress={handleSubmit((values) => createPost(values))}
-			/>
+			<View className="mb-4">
+				<Button
+					title="Submit"
+					onPress={handleSubmit((values) => createPost(values))}
+				/>
+			</View>
 		</View>
 	);
 };

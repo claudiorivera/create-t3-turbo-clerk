@@ -28,18 +28,23 @@ export function CreatePostExample() {
 	});
 
 	return (
-		<>
+		<div className="mt-auto">
 			<Form
 				form={form}
 				handleSubmit={async (values) => {
 					await mutation.mutateAsync(values);
 					form.reset();
 				}}
-				className="space-y-2"
+				className="flex flex-col gap-4"
 			>
 				<label className="flex flex-col">
-					Title
-					<input type="text" {...form.register("title")} className="border" />
+					<div>Title</div>
+					<input
+						type="text"
+						{...form.register("title")}
+						className="rounded border border-gray-500 p-2"
+						placeholder="Title"
+					/>
 					{form.formState.errors.title?.message && (
 						<p className="text-red-700">
 							{form.formState.errors.title?.message}
@@ -47,20 +52,23 @@ export function CreatePostExample() {
 					)}
 				</label>
 				<label className="flex flex-col">
-					Content
-					<textarea {...form.register("content")} className="border" />
+					<div>Content</div>
+					<textarea
+						{...form.register("content")}
+						className="rounded border border-gray-500 p-2"
+					/>
 					{form.formState.errors.content?.message && (
 						<p className="text-red-700">
 							{form.formState.errors.content?.message}
 						</p>
 					)}
 				</label>
+				<SubmitButton>
+					<button className="w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
+						Submit
+					</button>
+				</SubmitButton>
 			</Form>
-			<SubmitButton
-				form={form} // If you place the submit button outside of the form, you need to specify the form to submit
-			>
-				Add post
-			</SubmitButton>
-		</>
+		</div>
 	);
 }

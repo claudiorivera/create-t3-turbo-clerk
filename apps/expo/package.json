@@ -4,7 +4,7 @@
 	"private": true,
 	"main": "index.tsx",
 	"scripts": {
-		"clean": "git clean -xdf .expo .turbo node_modules",
+		"clean": "git clean -xdf .expo .turbo node_modules tsconfig.tsbuildinfo",
 		"dev": "expo start",
 		"dev:android": "expo start --android",
 		"dev:ios": "expo start --ios",
@@ -48,7 +48,7 @@
 		"@types/react": "^18.2.18",
 		"eslint": "^8.46.0",
 		"postcss": "^8.4.26",
-		"tailwindcss": "3.3.3",
+		"tailwindcss": "3.3.2",
 		"typescript": "^5.1.6"
 	},
 	"eslintConfig": {

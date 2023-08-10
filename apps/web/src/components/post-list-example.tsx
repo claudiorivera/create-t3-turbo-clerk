@@ -6,7 +6,7 @@ export default function PostListExample() {
 	const { data: posts } = api.post.all.useQuery();
 
 	return (
-		<div>
+		<div className="flex-grow">
 			{posts?.map((post) => (
 				<div key={post.id}>
 					<h2 className="font-bold">{post.title}</h2>
