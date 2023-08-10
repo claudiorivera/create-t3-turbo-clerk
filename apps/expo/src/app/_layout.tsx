@@ -1,7 +1,6 @@
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 import { ClerkProvider } from "@clerk/clerk-expo";
 
 import { TRPCProvider } from "~/utils/api";
@@ -16,8 +15,14 @@ const RootLayout = () => {
 		<ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
 			<TRPCProvider>
 				<SafeAreaProvider>
-					<Stack />
-					<StatusBar />
+					<Stack>
+						<Stack.Screen
+							name="(tabs)"
+							options={{
+								headerShown: false,
+							}}
+						/>
+					</Stack>
 				</SafeAreaProvider>
 			</TRPCProvider>
 		</ClerkProvider>
