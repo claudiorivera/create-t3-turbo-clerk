@@ -1,13 +1,14 @@
 import React from "react";
-import { Button } from "react-native";
+import { Text } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import { useOAuth } from "@clerk/clerk-expo";
 
+import { StyledButton } from "~/components/StyledButton";
 import { useWarmUpBrowser } from "~/hooks/useWarmUpBrowser";
 
 WebBrowser.maybeCompleteAuthSession();
 
-const SignIn = () => {
+export const SignInButton = () => {
 	useWarmUpBrowser();
 
 	const { startOAuthFlow } = useOAuth({ strategy: "oauth_github" });
@@ -16,16 +17,17 @@ const SignIn = () => {
 		try {
 			const { createdSessionId, setActive } = await startOAuthFlow();
 
-			if (createdSessionId) {
-				await setActive?.({ session: createdSessionId });
-			} else {
-				// Use signIn or signUp for next steps such as MFA
+			if (createdSessionId && !!setActive) {
+				await setActive({ session: createdSessionId });
 			}
 		} catch (err) {
 			console.error("OAuth error", err);
 		}
 	}, [startOAuthFlow]);
 
-	return <Button title="Sign in with GitHub" onPress={onPress} />;
+	return (
+		<StyledButton onPress={onPress}>
+			<Text>Sign In</Text>
+		</StyledButton>
+	);
 };
-export default SignIn;
