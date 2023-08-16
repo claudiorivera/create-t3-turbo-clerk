@@ -1,12 +1,9 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import * as WebBrowser from "expo-web-browser";
 import { useAuth, useUser } from "@clerk/clerk-expo";
 
-WebBrowser.maybeCompleteAuthSession();
-
-export default function Account() {
+export default function Profile() {
 	const { signOut } = useAuth();
 	const { user } = useUser();
 
