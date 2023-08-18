@@ -10,9 +10,9 @@ export default function HomePage() {
 	return (
 		<div className="flex h-screen flex-col gap-4 p-4">
 			<SignOutButton>
-				<button className="w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
+				<div className="w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
 					Sign Out
-				</button>
+				</div>
 			</SignOutButton>
 			<PostListExample />
 			<CreatePostExample />
@@ -79,9 +79,9 @@ function CreatePostExample() {
 					)}
 				</label>
 				<SubmitButton>
-					<button className="w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
+					<div className="w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
 						Submit
-					</button>
+					</div>
 				</SubmitButton>
 			</Form>
 		</div>
