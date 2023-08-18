@@ -1,4 +1,5 @@
-import { Stack } from "expo-router";
+import { Pressable, Text } from "react-native";
+import { Link, Stack } from "expo-router";
 
 export default function ProtectedLayout() {
 	return (
@@ -9,11 +10,18 @@ export default function ProtectedLayout() {
 		>
 			<Stack.Screen name="(tabs)" />
 			<Stack.Screen
-				name="new-post-modal"
+				name="new-post-card"
 				options={{
 					title: "New Post",
-					presentation: "modal",
+					presentation: "card",
 					headerShown: true,
+					headerLeft: () => (
+						<Link asChild href="..">
+							<Pressable className="pr-4">
+								<Text>Cancel</Text>
+							</Pressable>
+						</Link>
+					),
 				}}
 			/>
 		</Stack>

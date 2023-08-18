@@ -12,7 +12,7 @@ export default function Posts() {
 			<Tabs.Screen
 				options={{
 					headerRight: () => (
-						<Link asChild href="/new-post-modal">
+						<Link asChild href="/new-post-card">
 							<Pressable className="px-4">
 								<Text>New Post</Text>
 							</Pressable>
