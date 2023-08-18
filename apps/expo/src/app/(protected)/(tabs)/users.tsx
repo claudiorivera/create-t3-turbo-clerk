@@ -13,7 +13,9 @@ export default function UsersList() {
 				keyExtractor={(user) => user.id}
 				renderItem={({ item: user }) => (
 					<View>
-						<Text className="text-black">{user.username}</Text>
+						<Text className="text-black">
+							{user.firstName} {user.lastName}
+						</Text>
 					</View>
 				)}
 				estimatedItemSize={10}

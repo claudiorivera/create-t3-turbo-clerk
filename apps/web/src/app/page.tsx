@@ -96,7 +96,9 @@ function PostListExample() {
 			<ul className="flex flex-col gap-4">
 				{posts?.map((post) => (
 					<li key={post.id}>
-						<p className="text-xs">{post.user.username}</p>
+						<p className="text-xs">
+							{post.user.firstName} {post.user.lastName}
+						</p>
 						<h2 className="font-bold">{post.title}</h2>
 						<p>{post.content}</p>
 					</li>
