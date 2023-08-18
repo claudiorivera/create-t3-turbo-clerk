@@ -1,11 +1,16 @@
-import { Pressable, Text, View } from "react-native";
+import { useState } from "react";
+import { Pressable, Switch, Text, View } from "react-native";
 import { Link, Tabs } from "expo-router";
 import { FlashList } from "@shopify/flash-list";
 
 import { api } from "~/utils/api";
 
 export default function Posts() {
-	const { data: posts = [] } = api.post.all.useQuery();
+	const [shouldFilterForMyPosts, setShouldFilterForMyPosts] = useState(false);
+
+	const { data: posts = [] } = shouldFilterForMyPosts
+		? api.post.mine.useQuery()
+		: api.post.all.useQuery();
 
 	return (
 		<View className="h-full px-4 pt-4">
@@ -17,6 +22,16 @@ export default function Posts() {
 								<Text>New Post</Text>
 							</Pressable>
 						</Link>
+					),
+					headerLeft: () => (
+						<View className="flex flex-row items-center px-4">
+							<Text>All</Text>
+							<Switch
+								value={shouldFilterForMyPosts}
+								onValueChange={setShouldFilterForMyPosts}
+							/>
+							<Text>Mine</Text>
+						</View>
 					),
 				}}
 			/>

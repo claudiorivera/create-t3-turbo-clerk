@@ -6,7 +6,11 @@ export default function TabsLayout() {
 	const { isSignedIn } = useAuth();
 
 	return (
-		<Tabs>
+		<Tabs
+			screenOptions={{
+				headerTitleAlign: "center",
+			}}
+		>
 			<Tabs.Screen
 				name="posts"
 				options={{

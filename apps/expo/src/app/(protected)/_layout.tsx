@@ -15,6 +15,7 @@ export default function ProtectedLayout() {
 					title: "New Post",
 					presentation: "card",
 					headerShown: true,
+					headerTitleAlign: "center",
 					headerLeft: () => (
 						<Link asChild href="..">
 							<Pressable className="pr-4">
