@@ -18,6 +18,16 @@ export default function TabsLayout() {
 				redirect={!isSignedIn}
 			/>
 			<Tabs.Screen
+				name="users"
+				options={{
+					title: "Users",
+					tabBarIcon: ({ color, size }) => (
+						<Ionicons name="people" size={size} color={color} />
+					),
+				}}
+				redirect={!isSignedIn}
+			/>
+			<Tabs.Screen
 				name="profile"
 				options={{
 					title: "Profile",
