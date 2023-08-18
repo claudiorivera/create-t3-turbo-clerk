@@ -4,13 +4,40 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const postRouter = createTRPCRouter({
-	all: publicProcedure.query(({ ctx }) => {
-		return ctx.prisma.post.findMany({ orderBy: { id: "desc" } });
+	all: publicProcedure.query(async ({ ctx }) => {
+		const posts = await ctx.prisma.post.findMany({ orderBy: { id: "desc" } });
+
+		const postsWithClerkUsers = await Promise.all(
+			posts.map(async (post) => {
+				const clerkUser = await ctx.clerk.users.getUser(post.userId);
+
+				return {
+					...post,
+					user: {
+						...clerkUser,
+					},
+				};
+			}),
+		);
+
+		return postsWithClerkUsers;
 	}),
 	byId: publicProcedure
 		.input(z.object({ id: z.string() }))
-		.query(({ ctx, input }) => {
-			return ctx.prisma.post.findFirst({ where: { id: input.id } });
+		.query(async ({ ctx, input }) => {
+			const post = await ctx.prisma.post.findFirst({ where: { id: input.id } });
+
+			if (!post)
+				throw new TRPCError({ code: "NOT_FOUND", message: "Post not found" });
+
+			const clerkUser = await ctx.clerk.users.getUser(post.userId);
+
+			return {
+				...post,
+				user: {
+					...clerkUser,
+				},
+			};
 		}),
 	delete: protectedProcedure
 		.input(z.string())

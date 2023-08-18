@@ -25,6 +25,7 @@ export default function Posts() {
 				keyExtractor={(post) => post.id}
 				renderItem={({ item: post }) => (
 					<View>
+						<Text>{post.user.username}</Text>
 						<Text className="font-bold">{post.title}</Text>
 						<Text>{post.content}</Text>
 					</View>
