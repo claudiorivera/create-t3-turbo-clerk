@@ -93,12 +93,15 @@ function PostListExample() {
 
 	return (
 		<div className="flex-grow">
-			{posts?.map((post) => (
-				<div key={post.id}>
-					<h2 className="font-bold">{post.title}</h2>
-					<p>{post.content}</p>
-				</div>
-			))}
+			<ul className="flex flex-col gap-4">
+				{posts?.map((post) => (
+					<li key={post.id}>
+						<p className="text-xs">{post.user.username}</p>
+						<h2 className="font-bold">{post.title}</h2>
+						<p>{post.content}</p>
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 }
