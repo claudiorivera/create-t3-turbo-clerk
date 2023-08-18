@@ -1,5 +1,4 @@
-import React from "react";
-import { Text } from "react-native";
+import React, { ReactNode } from "react";
 import * as WebBrowser from "expo-web-browser";
 import { useOAuth } from "@clerk/clerk-expo";
 
@@ -8,10 +7,18 @@ import { useWarmUpBrowser } from "~/hooks/useWarmUpBrowser";
 
 WebBrowser.maybeCompleteAuthSession();
 
-export const SignInButton = () => {
+export const SignInButton = ({
+	provider,
+	children,
+}: {
+	provider: "github" | "google";
+	children: ReactNode;
+}) => {
 	useWarmUpBrowser();
 
-	const { startOAuthFlow } = useOAuth({ strategy: "oauth_github" });
+	const { startOAuthFlow } = useOAuth({
+		strategy: provider === "github" ? "oauth_github" : "oauth_google",
+	});
 
 	const onPress = React.useCallback(async () => {
 		try {
@@ -25,9 +32,5 @@ export const SignInButton = () => {
 		}
 	}, [startOAuthFlow]);
 
-	return (
-		<StyledButton onPress={onPress}>
-			<Text>Sign In</Text>
-		</StyledButton>
-	);
+	return <StyledButton onPress={onPress}>{children}</StyledButton>;
 };
