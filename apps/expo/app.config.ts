@@ -1,10 +1,10 @@
 import type { ExpoConfig } from "@expo/config";
 
-const projectId = process.env.EAS_PROJECT_ID;
+const projectId = process.env.EXPO_PUBLIC_EAS_PROJECT_ID;
 
 if (!projectId) {
 	throw new Error(
-		"Please set the EAS_PROJECT_ID environment variable to your EAS project ID.",
+		"Please set the EXPO_PUBLIC_EAS_PROJECT_ID environment variable to your EAS project ID.",
 	);
 }
 
