@@ -4,13 +4,16 @@ import { Link, Tabs } from "expo-router";
 import { FlashList } from "@shopify/flash-list";
 
 import { api } from "~/utils/api";
+import { usePullToRefresh } from "~/hooks/usePullToRefresh";
 
 export default function Posts() {
 	const [shouldFilterForMyPosts, setShouldFilterForMyPosts] = useState(false);
 
-	const { data: posts = [] } = shouldFilterForMyPosts
+	const { data: posts = [], refetch } = shouldFilterForMyPosts
 		? api.post.mine.useQuery()
 		: api.post.all.useQuery();
+
+	const { isRefreshing, onRefresh } = usePullToRefresh(refetch);
 
 	return (
 		<View className="h-full px-4 pt-4">
@@ -49,6 +52,8 @@ export default function Posts() {
 				)}
 				ItemSeparatorComponent={() => <View className="h-2" />}
 				estimatedItemSize={50}
+				onRefresh={onRefresh}
+				refreshing={isRefreshing}
 			/>
 		</View>
 	);
