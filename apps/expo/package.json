@@ -6,6 +6,7 @@
 	"scripts": {
 		"clean": "git clean -xdf .expo .turbo node_modules tsconfig.tsbuildinfo",
 		"dev": "expo start",
+		"dev:start": "npx expo start --dev-client",
 		"dev:android": "expo start --android",
 		"dev:ios": "expo start --ios",
 		"lint": "eslint .",
