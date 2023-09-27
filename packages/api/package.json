@@ -15,7 +15,7 @@
 		"@clerk/clerk-sdk-node": "^4.12.2",
 		"@trpc/client": "^10.37.1",
 		"@trpc/server": "^10.37.1",
-		"superjson": "1.13.1",
+		"superjson": "1.13.3",
 		"zod": "^3.21.4"
 	},
 	"devDependencies": {
