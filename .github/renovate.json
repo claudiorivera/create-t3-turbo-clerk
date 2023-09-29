@@ -19,10 +19,6 @@
 			"matchPackagePatterns": ["@trpc"],
 			"groupName": "trpc",
 			"automerge": false
-		},
-		{
-			"matchPackagePatterns": ["tailwindcss"],
-			"allowedVersions": "!/3.3.3/" // https://github.com/marklawlor/nativewind/issues/498
 		}
 	],
 	"updateInternalDeps": true,
